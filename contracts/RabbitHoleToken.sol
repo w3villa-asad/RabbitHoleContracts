@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract RabbitHoleToken is ERC20, Ownable {
 
-    uint256 public constant INITIAL_SUPPLY = 100_000_000;
+    uint256 public constant INITIAL_SUPPLY = 100_000_000 * 1e18;
 
     constructor() ERC20("Rabbit Hole Token", "RBTHL") {
         _mint(msg.sender, INITIAL_SUPPLY);

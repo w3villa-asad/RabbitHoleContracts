@@ -3,173 +3,68 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/interfaces/IERC20.sol";
+import "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
+import "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-interface IUniswapV2Router01 {
-    function factory() external pure returns (address);
-    function WETH() external pure returns (address);
+/// @title Interface for WETH9
+interface IWETH9 is IERC20 {
+    /// @notice Deposit ether to get wrapped ether
+    function deposit() external payable;
 
-    function addLiquidity(
-        address tokenA,
-        address tokenB,
-        uint amountADesired,
-        uint amountBDesired,
-        uint amountAMin,
-        uint amountBMin,
-        address to,
-        uint deadline
-    ) external returns (uint amountA, uint amountB, uint liquidity);
-    function addLiquidityETH(
-        address token,
-        uint amountTokenDesired,
-        uint amountTokenMin,
-        uint amountETHMin,
-        address to,
-        uint deadline
-    ) external payable returns (uint amountToken, uint amountETH, uint liquidity);
-    function removeLiquidity(
-        address tokenA,
-        address tokenB,
-        uint liquidity,
-        uint amountAMin,
-        uint amountBMin,
-        address to,
-        uint deadline
-    ) external returns (uint amountA, uint amountB);
-    function removeLiquidityETH(
-        address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
-        address to,
-        uint deadline
-    ) external returns (uint amountToken, uint amountETH);
-    function removeLiquidityWithPermit(
-        address tokenA,
-        address tokenB,
-        uint liquidity,
-        uint amountAMin,
-        uint amountBMin,
-        address to,
-        uint deadline,
-        bool approveMax, uint8 v, bytes32 r, bytes32 s
-    ) external returns (uint amountA, uint amountB);
-    function removeLiquidityETHWithPermit(
-        address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
-        address to,
-        uint deadline,
-        bool approveMax, uint8 v, bytes32 r, bytes32 s
-    ) external returns (uint amountToken, uint amountETH);
-    function swapExactTokensForTokens(
-        uint amountIn,
-        uint amountOutMin,
-        address[] calldata path,
-        address to,
-        uint deadline
-    ) external returns (uint[] memory amounts);
-    function swapTokensForExactTokens(
-        uint amountOut,
-        uint amountInMax,
-        address[] calldata path,
-        address to,
-        uint deadline
-    ) external returns (uint[] memory amounts);
-    function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external
-        payable
-        returns (uint[] memory amounts);
-    function swapTokensForExactETH(uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline)
-        external
-        returns (uint[] memory amounts);
-    function swapExactTokensForETH(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external
-        returns (uint[] memory amounts);
-    function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline)
-        external
-        payable
-        returns (uint[] memory amounts);
-
-    function quote(uint amountA, uint reserveA, uint reserveB) external pure returns (uint amountB);
-    function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) external pure returns (uint amountOut);
-    function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) external pure returns (uint amountIn);
-    function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
-    function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts);
-}
-
-interface IUniswapV2Router02 is IUniswapV2Router01 {
-    function removeLiquidityETHSupportingFeeOnTransferTokens(
-        address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
-        address to,
-        uint deadline
-    ) external returns (uint amountETH);
-    function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(
-        address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
-        address to,
-        uint deadline,
-        bool approveMax, uint8 v, bytes32 r, bytes32 s
-    ) external returns (uint amountETH);
-
-    function swapExactTokensForTokensSupportingFeeOnTransferTokens(
-        uint amountIn,
-        uint amountOutMin,
-        address[] calldata path,
-        address to,
-        uint deadline
-    ) external;
-    function swapExactETHForTokensSupportingFeeOnTransferTokens(
-        uint amountOutMin,
-        address[] calldata path,
-        address to,
-        uint deadline
-    ) external payable;
-    function swapExactTokensForETHSupportingFeeOnTransferTokens(
-        uint amountIn,
-        uint amountOutMin,
-        address[] calldata path,
-        address to,
-        uint deadline
-    ) external;
+    /// @notice Withdraw wrapped ether to get ether
+    function withdraw(uint256) external;
 }
 
 contract RabbitHoleSwapper is Ownable {
 
-  IUniswapV2Router02 public router;
-  IERC20 public token;
-  address public adminAddress;
+    ISwapRouter public immutable swapRouter;
+    address public token;
+    address public adminAddress;
 
-  uint256 MAX_INT = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
-  
-  constructor(
-    address _router, 
-    address _token, 
-    address _adminAddress
-  ) {
-    router = IUniswapV2Router02(_router);
+    address public constant WETH9 = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
 
-    token = IERC20(_token);
-    token.approve(_router, MAX_INT);
+    uint24 public constant poolFee = 3000;
 
-    adminAddress = _adminAddress;
-  }
+    uint256 MAX_INT = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+    
+    constructor(
+        ISwapRouter _router, 
+        address _token, 
+        address _adminAddress
+    ) {
+        swapRouter = _router;
+        token = _token;
+        adminAddress = _adminAddress;
+    }
 
-  receive() external payable {}
+    receive() external payable {}
 
-  function performSwap(uint256 _amount) external onlyOwner {
-    require(_amount > 0, 'Swapper: amount must be greater than 0');
-    address[] memory path = new address[](2);
-    path[0] = address(token);
-    path[1] = router.WETH();
+    function performSwap(uint256 _amount) external {
+        require(_amount > 0, 'Swapper: amount must be greater than 0');
+        // Transfer the specified amount of RBTHL to this contract.
+        TransferHelper.safeTransferFrom(token, msg.sender, address(this), _amount);
 
-    router.swapExactTokensForETH(_amount, 0, path, adminAddress, block.timestamp);
-  }
+        // Approve the router to spend RBTHL.
+        TransferHelper.safeApprove(token, address(swapRouter), _amount);
+
+        ISwapRouter.ExactInputSingleParams memory params =
+            ISwapRouter.ExactInputSingleParams({
+                tokenIn: token,
+                tokenOut: WETH9,
+                fee: poolFee,
+                deadline: block.timestamp,
+                recipient: address(this),
+                amountIn: _amount,
+                amountOutMinimum: 0,
+                sqrtPriceLimitX96: 0
+            });
+
+        // The call to `exactInputSingle` executes the swap.
+        uint256 amountOut = swapRouter.exactInputSingle(params);
+
+        IWETH9(WETH9).withdraw(amountOut);
+        TransferHelper.safeTransferETH(adminAddress, amountOut);
+    }
 
 }
