@@ -1,14 +1,17 @@
-// SPDX-License-Identifier: None
+
+//SPDX-License-Identifier: None
+
 pragma solidity ^0.8.0;
+
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/Context.sol";
 
 // chainlink aggregator contract
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 interface IUniswapV2Pair {
     function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);
@@ -73,14 +76,8 @@ interface IUniswapV2Factory {
         returns (address pair);
 }
 
-interface IUSDT {
-    function balanceOf(address account) external view returns (uint256);
-    function mint(address account, uint256 amount) external payable;
-    function burn(uint256 amount) external payable;
-}
 
-
-contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
+contract RabbitHoleToken is ERC20, Ownable {
 
     using SafeMath for uint256;
 
@@ -88,24 +85,13 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
 
     // uint256 public cost;
 
-    uint256 public salePriceUsd = 10_000_000_000_000_000; //$0.01
-
-    mapping (address => uint256) public _toClaim;
-
-    mapping (address => uint256) public  _ethDeposit;
+    uint256 public salePriceUsd = 1_000_000; // 1 USD
 
     address public pair;
 
-    address rbthl = address(this);
-
-    IUSDT public USDT;
+    address public USDT = 0xc9eead045d07179C8d360132de882006398CCc73;
 
     IUniswapV2Router02 public router;
-
-    mapping(address => uint256) public toRefund;
-
-    uint256 public balance;
-
 
     // mapping to is eligible for tokens
     mapping (address => bool) public isEligible;
@@ -121,9 +107,8 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
 
     AggregatorV3Interface internal priceFeed;
 
-    constructor(address _dexRouter, address _usdt) ERC20("Rabbit Hole Token", "RBTHL") {
+    constructor(address _dexRouter) ERC20("Rabbit Hole Token", "RBTHL") {
         _mint(msg.sender, INITIAL_SUPPLY);
-        USDT = IUSDT(_usdt);
         isAdmin[msg.sender] = true;
         router = IUniswapV2Router02(_dexRouter);
         pair = IUniswapV2Factory(router.factory()).createPair(address(USDT), address(this));
@@ -138,12 +123,6 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
     function deposit(address _account, uint256 _amount) external onlyOwner {
         _mint(_account, _amount);
     }
-
-    // setUSDT is used to set the USDT address
-    // function setUSDT(address _usdt) external onlyOwner {
-    //     USDT = _usdt;
-    //     pair = IUniswapV2Factory(router.factory()).createPair(address(USDT), address(this));
-    // }
 
     // to add admins
     function addAdmin(address _account) external onlyOwner {
@@ -185,60 +164,33 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
         return uint256(price);
     }
 
-    // function buy(uint256 _amountinUSDT) public {
-
-    //     //  balance of msg.sender in usdt is greater than zero
-    //     require(USDT.balanceOf(msg.sender) >= _amountinUSDT, "You have no usdt to buy");
-
-    //     // if balance of sender in usdt is greater than 0 then only allow to buy 500000 rabbit hole tokens
-
-    //     uint256 current_balance = _amountinUSDT.div(10**6); //eg. 1_000_000 _amountinUSDT = 1 USDT
-
-    //     USDT.mint(rbthl, _amountinUSDT);
-    //     USDT.burn(_amountinUSDT);
-
-    //     // require(current_balance > 0, "You have no usdt to buy");
-
-    //     _mint(msg.sender, current_balance); // minting the tokens to the user
+    // function buy() public payable {
+    //     // uint256 price = getCurrentPrice();
+    //     // uint256 amount = msg.value;
+    //     // uint256 amountInWAVAX = amount.mul(price);
+    //     // _mint(msg.sender, amountInWAVAX);
     // }
 
-    // function buyRBTHL(uint256 amount) public {
-    //     // Transfer amount USDT tokens from msg.sender to contract
-    //     USDT.transferFrom(msg.sender, address(this), amount);
+     IERC20 usdt = IERC20(USDT_ADDRESS);
 
-    //     // Send amount tokens to msg.sender
-    //     transfer(msg.sender, amount);
-    // }
+    // Token to send for USDT
+    IERC20 token = address(this);
 
-    function buy() public payable nonReentrant {
+    function deposit(uint256 amount) public {
+        // Transfer amount USDT tokens from msg.sender to contract
+        usdt.transferFrom(msg.sender, address(this), amount);
 
-            // compute the amount of token to buy based on the current rate
-            (uint256 tokensToBuy, uint256 exceedingEther) = computeTokensAmount(
-                msg.value
-            );
-            _toClaim[msg.sender] = _toClaim[msg.sender].add(tokensToBuy);
+        // Send amount tokens to msg.sender
+        token.transfer(msg.sender, amount);
+    }
 
+    // buyback and burn the tokens
+    function buyback(uint256 amount) public {
+        // Transfer amount tokens from contract to msg.sender
+        token.transfer(msg.sender, amount);
 
-            balance += msg.value;   // add the funds to the balance
-
-            // refund eventually exceeding eth
-            if (exceedingEther > 0) {
-                uint256 _toRefund = toRefund[msg.sender] + exceedingEther;
-                toRefund[msg.sender] = _toRefund;
-            }
-
-
-
-            distributed = distributed.add(tokensToBuy);
-
-            supply = supply.sub(tokensToBuy);
-            // Mint new tokens for each submission
-            // prometaV.mint(msg.sender,tokensToBuy);
-
-            // eth deposit of user is stored in _ethDeposit
-            _ethDeposit[msg.sender] = _ethDeposit[msg.sender].add(msg.value);
-
-            emit Buy(msg.sender, tokensToBuy);
-        } 
+        // Burn amount tokens from contract
+        token.transferFrom(address(this), address(0), amount);
+    }
 
 }

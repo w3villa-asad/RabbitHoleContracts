@@ -24,6 +24,15 @@ async function main() {
   await rabbitHoleToken.deployed();
   console.log("RabbitHoleToken deployed to:", rabbitHoleToken.address);
 
+  const NFTAuction = await hre.ethers.getContractFactory("NFTAuction");
+  const nftAuction = await NFTAuction.deploy();
+  await nftAuction.deployed();
+  console.log("NFTAuction deployed to:", nftAuction.address);
+
+  const ItemAuction = await hre.ethers.getContractFactory("ItemAuction");
+  const itemAuction = await ItemAuction.deploy();
+  await itemAuction.deployed();
+  console.log("ItemAuction deployed to:", itemAuction.address);
 
   // TODO: Change for mainnet
   const swapRouter = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
@@ -39,6 +48,14 @@ async function main() {
 
   await hre.run("verify:verify", {
     address: rabbitHoleToken.address,
+  });
+
+  await hre.run("verify:verify", {
+    address: nftAuction.address,
+  });
+
+  await hre.run("verify:verify", {
+    address: itemAuction.address,
   });
 
   await hre.run("verify:verify", {

@@ -1,0 +1,883 @@
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true, bgcolor = "#2e3e56" ];
+  node [ style = "filled", fillcolor = "#edad56", color = "#edad56", penwidth =3 ];
+  edge [ color = "#fcfcfc", penwidth =2, fontname = "helvetica Neue Ultra Light" ];
+subgraph "clusterRabbitHoleToken" {
+  graph [ label = "RabbitHoleToken", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "RabbitHoleToken.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "RabbitHoleToken.mint" [ label = "mint", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "RabbitHoleToken._mint" [ label = "_mint" ];
+}
+
+subgraph "clusterNftContractInterface" {
+  graph [ label = "NftContractInterface  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "NftContractInterface.awardItem" [ label = "awardItem" ];
+}
+
+subgraph "clusterItemAuction" {
+  graph [ label = "ItemAuction", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ItemAuction.isAuctionNotStartedByOwner" [ label = "isAuctionNotStartedByOwner", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.auctionOngoing" [ label = "auctionOngoing", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.priceGreaterThanZero" [ label = "priceGreaterThanZero", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.minPriceDoesNotExceedLimit" [ label = "minPriceDoesNotExceedLimit", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.notNftSeller" [ label = "notNftSeller", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.onlyNftSeller" [ label = "onlyNftSeller", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.bidAmountMeetsBidRequirements" [ label = "bidAmountMeetsBidRequirements", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.onlyApplicableBuyer" [ label = "onlyApplicableBuyer", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.minimumBidNotMade" [ label = "minimumBidNotMade", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.paymentAccepted" [ label = "paymentAccepted", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.isAuctionOver" [ label = "isAuctionOver", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.notZeroAddress" [ label = "notZeroAddress", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.increasePercentageAboveMinimum" [ label = "increasePercentageAboveMinimum", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.isFeePercentagesLessThanMaximum" [ label = "isFeePercentagesLessThanMaximum", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.correctFeeRecipientsAndPercentages" [ label = "correctFeeRecipientsAndPercentages", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.isNotASale" [ label = "isNotASale", color = "#1bc6a6", shape =doubleoctagon ];
+  "ItemAuction.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ItemAuction._isAuctionOngoing" [ label = "_isAuctionOngoing" ];
+  "ItemAuction._isABidMade" [ label = "_isABidMade" ];
+  "ItemAuction._isMinimumBidMade" [ label = "_isMinimumBidMade" ];
+  "ItemAuction._isBuyNowPriceMet" [ label = "_isBuyNowPriceMet" ];
+  "ItemAuction._doesBidMeetBidRequirements" [ label = "_doesBidMeetBidRequirements" ];
+  "ItemAuction._isASale" [ label = "_isASale" ];
+  "ItemAuction._isWhitelistedSale" [ label = "_isWhitelistedSale" ];
+  "ItemAuction._isHighestBidderAllowedToPurchaseNFT" [ label = "_isHighestBidderAllowedToPurchaseNFT", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ItemAuction._isHighestBidderWhitelisted" [ label = "_isHighestBidderWhitelisted" ];
+  "ItemAuction._isPaymentAccepted" [ label = "_isPaymentAccepted" ];
+  "ItemAuction._isERC20Auction" [ label = "_isERC20Auction" ];
+  "ItemAuction._getPortionOfBid" [ label = "_getPortionOfBid" ];
+  "ItemAuction._getBidIncreasePercentage" [ label = "_getBidIncreasePercentage" ];
+  "ItemAuction._getAuctionBidPeriod" [ label = "_getAuctionBidPeriod" ];
+  "ItemAuction._getNftRecipient" [ label = "_getNftRecipient" ];
+  "ItemAuction._setupAuction" [ label = "_setupAuction" ];
+  "ItemAuction._createNewNftAuction" [ label = "_createNewNftAuction", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ItemAuction.createDefaultNftAuction" [ label = "createDefaultNftAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.createNewNftAuction" [ label = "createNewNftAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction._setupSale" [ label = "_setupSale" ];
+  "ItemAuction.createSale" [ label = "createSale", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction._makeBid" [ label = "_makeBid", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ItemAuction.makeBid" [ label = "makeBid", color = "brown", fillcolor = "#ffbdb9" ];
+  "ItemAuction.makeCustomBid" [ label = "makeCustomBid", color = "brown", fillcolor = "#ffbdb9" ];
+  "ItemAuction._updateOngoingAuction" [ label = "_updateOngoingAuction" ];
+  "ItemAuction._updateAuctionEnd" [ label = "_updateAuctionEnd" ];
+  "ItemAuction._resetAuction" [ label = "_resetAuction" ];
+  "ItemAuction._resetBids" [ label = "_resetBids" ];
+  "ItemAuction._updateHighestBid" [ label = "_updateHighestBid", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ItemAuction._reverseAndResetPreviousBid" [ label = "_reverseAndResetPreviousBid" ];
+  "ItemAuction._reversePreviousBidAndUpdateHighestBid" [ label = "_reversePreviousBidAndUpdateHighestBid" ];
+  "ItemAuction._transferNftAndPaySeller" [ label = "_transferNftAndPaySeller" ];
+  "ItemAuction._payFeesAndSeller" [ label = "_payFeesAndSeller" ];
+  "ItemAuction._payout" [ label = "_payout" ];
+  "ItemAuction.settleAuction" [ label = "settleAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.withdrawAuction" [ label = "withdrawAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.withdrawBid" [ label = "withdrawBid", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.updateWhitelistedBuyer" [ label = "updateWhitelistedBuyer", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.updateMinimumPrice" [ label = "updateMinimumPrice", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.updateBuyNowPrice" [ label = "updateBuyNowPrice", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.takeHighestBid" [ label = "takeHighestBid", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.ownerOfNFT" [ label = "ownerOfNFT", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.withdrawAllFailedCredits" [ label = "withdrawAllFailedCredits", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "ItemAuction.payable" [ label = "payable" ];
+}
+
+subgraph "clusterIERC721" {
+  graph [ label = "IERC721  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IERC721.balanceOf" [ label = "balanceOf", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721.ownerOf" [ label = "ownerOf", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721.safeTransferFrom" [ label = "safeTransferFrom", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721.transferFrom" [ label = "transferFrom", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721.approve" [ label = "approve", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721.getApproved" [ label = "getApproved", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721.setApprovalForAll" [ label = "setApprovalForAll", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721.isApprovedForAll" [ label = "isApprovedForAll", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterIERC165" {
+  graph [ label = "IERC165  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IERC165.supportsInterface" [ label = "supportsInterface", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterIERC721Receiver" {
+  graph [ label = "IERC721Receiver  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IERC721Receiver.onERC721Received" [ label = "onERC721Received", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterIERC20" {
+  graph [ label = "IERC20  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IERC20.totalSupply" [ label = "totalSupply", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC20.balanceOf" [ label = "balanceOf", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC20.transfer" [ label = "transfer", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC20.allowance" [ label = "allowance", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC20.approve" [ label = "approve", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC20.transferFrom" [ label = "transferFrom", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterNFTAuction" {
+  graph [ label = "NFTAuction", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "NFTAuction.isAuctionNotStartedByOwner" [ label = "isAuctionNotStartedByOwner", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.auctionOngoing" [ label = "auctionOngoing", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.priceGreaterThanZero" [ label = "priceGreaterThanZero", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.minPriceDoesNotExceedLimit" [ label = "minPriceDoesNotExceedLimit", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.notNftSeller" [ label = "notNftSeller", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.onlyNftSeller" [ label = "onlyNftSeller", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.bidAmountMeetsBidRequirements" [ label = "bidAmountMeetsBidRequirements", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.onlyApplicableBuyer" [ label = "onlyApplicableBuyer", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.minimumBidNotMade" [ label = "minimumBidNotMade", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.paymentAccepted" [ label = "paymentAccepted", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.isAuctionOver" [ label = "isAuctionOver", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.notZeroAddress" [ label = "notZeroAddress", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.increasePercentageAboveMinimum" [ label = "increasePercentageAboveMinimum", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.isFeePercentagesLessThanMaximum" [ label = "isFeePercentagesLessThanMaximum", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.correctFeeRecipientsAndPercentages" [ label = "correctFeeRecipientsAndPercentages", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.isNotASale" [ label = "isNotASale", color = "#1bc6a6", shape =doubleoctagon ];
+  "NFTAuction.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NFTAuction._isAuctionOngoing" [ label = "_isAuctionOngoing" ];
+  "NFTAuction._isABidMade" [ label = "_isABidMade" ];
+  "NFTAuction._isMinimumBidMade" [ label = "_isMinimumBidMade" ];
+  "NFTAuction._isBuyNowPriceMet" [ label = "_isBuyNowPriceMet" ];
+  "NFTAuction._doesBidMeetBidRequirements" [ label = "_doesBidMeetBidRequirements" ];
+  "NFTAuction._isASale" [ label = "_isASale" ];
+  "NFTAuction._isWhitelistedSale" [ label = "_isWhitelistedSale" ];
+  "NFTAuction._isHighestBidderAllowedToPurchaseNFT" [ label = "_isHighestBidderAllowedToPurchaseNFT", color = "#f2c383", fillcolor = "#f2c383" ];
+  "NFTAuction._isHighestBidderWhitelisted" [ label = "_isHighestBidderWhitelisted" ];
+  "NFTAuction._isPaymentAccepted" [ label = "_isPaymentAccepted" ];
+  "NFTAuction._isERC20Auction" [ label = "_isERC20Auction" ];
+  "NFTAuction._getPortionOfBid" [ label = "_getPortionOfBid" ];
+  "NFTAuction._getBidIncreasePercentage" [ label = "_getBidIncreasePercentage" ];
+  "NFTAuction._getAuctionBidPeriod" [ label = "_getAuctionBidPeriod" ];
+  "NFTAuction._getNftRecipient" [ label = "_getNftRecipient" ];
+  "NFTAuction._transferNftToAuctionContract" [ label = "_transferNftToAuctionContract" ];
+  "NFTAuction._setupAuction" [ label = "_setupAuction" ];
+  "NFTAuction._createNewNftAuction" [ label = "_createNewNftAuction", color = "#f2c383", fillcolor = "#f2c383" ];
+  "NFTAuction.createDefaultNftAuction" [ label = "createDefaultNftAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.createNewNftAuction" [ label = "createNewNftAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction._setupSale" [ label = "_setupSale" ];
+  "NFTAuction.createSale" [ label = "createSale", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction._makeBid" [ label = "_makeBid", color = "#f2c383", fillcolor = "#f2c383" ];
+  "NFTAuction.makeBid" [ label = "makeBid", color = "brown", fillcolor = "#ffbdb9" ];
+  "NFTAuction.makeCustomBid" [ label = "makeCustomBid", color = "brown", fillcolor = "#ffbdb9" ];
+  "NFTAuction._updateOngoingAuction" [ label = "_updateOngoingAuction" ];
+  "NFTAuction._updateAuctionEnd" [ label = "_updateAuctionEnd" ];
+  "NFTAuction._resetAuction" [ label = "_resetAuction" ];
+  "NFTAuction._resetBids" [ label = "_resetBids" ];
+  "NFTAuction._updateHighestBid" [ label = "_updateHighestBid", color = "#f2c383", fillcolor = "#f2c383" ];
+  "NFTAuction._reverseAndResetPreviousBid" [ label = "_reverseAndResetPreviousBid" ];
+  "NFTAuction._reversePreviousBidAndUpdateHighestBid" [ label = "_reversePreviousBidAndUpdateHighestBid" ];
+  "NFTAuction._transferNftAndPaySeller" [ label = "_transferNftAndPaySeller" ];
+  "NFTAuction._payFeesAndSeller" [ label = "_payFeesAndSeller" ];
+  "NFTAuction._payout" [ label = "_payout" ];
+  "NFTAuction.settleAuction" [ label = "settleAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.withdrawAuction" [ label = "withdrawAuction", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.withdrawBid" [ label = "withdrawBid", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.updateWhitelistedBuyer" [ label = "updateWhitelistedBuyer", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.updateMinimumPrice" [ label = "updateMinimumPrice", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.updateBuyNowPrice" [ label = "updateBuyNowPrice", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.takeHighestBid" [ label = "takeHighestBid", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.ownerOfNFT" [ label = "ownerOfNFT", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.withdrawAllFailedCredits" [ label = "withdrawAllFailedCredits", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "NFTAuction.payable" [ label = "payable" ];
+}
+
+subgraph "clusterIV2SwapRouter" {
+  graph [ label = "IV2SwapRouter  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IV2SwapRouter.swapExactTokensForTokens" [ label = "swapExactTokensForTokens", color = "brown", fillcolor = "#ffbdb9" ];
+  "IV2SwapRouter.swapTokensForExactTokens" [ label = "swapTokensForExactTokens", color = "brown", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterIUniswapV3SwapCallback" {
+  graph [ label = "IUniswapV3SwapCallback  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IUniswapV3SwapCallback.uniswapV3SwapCallback" [ label = "uniswapV3SwapCallback", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterIV3SwapRouter" {
+  graph [ label = "IV3SwapRouter  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IV3SwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "brown", fillcolor = "#ffbdb9" ];
+  "IV3SwapRouter.exactInput" [ label = "exactInput", color = "brown", fillcolor = "#ffbdb9" ];
+  "IV3SwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "brown", fillcolor = "#ffbdb9" ];
+  "IV3SwapRouter.exactOutput" [ label = "exactOutput", color = "brown", fillcolor = "#ffbdb9" ];
+  "IV3SwapRouter.ExactInputSingleParams" [ label = "ExactInputSingleParams" ];
+}
+
+subgraph "clusterIApproveAndCall" {
+  graph [ label = "IApproveAndCall  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IApproveAndCall.getApprovalType" [ label = "getApprovalType", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IApproveAndCall.approveMax" [ label = "approveMax", color = "brown", fillcolor = "#ffbdb9" ];
+  "IApproveAndCall.approveMaxMinusOne" [ label = "approveMaxMinusOne", color = "brown", fillcolor = "#ffbdb9" ];
+  "IApproveAndCall.approveZeroThenMax" [ label = "approveZeroThenMax", color = "brown", fillcolor = "#ffbdb9" ];
+  "IApproveAndCall.approveZeroThenMaxMinusOne" [ label = "approveZeroThenMaxMinusOne", color = "brown", fillcolor = "#ffbdb9" ];
+  "IApproveAndCall.callPositionManager" [ label = "callPositionManager", color = "brown", fillcolor = "#ffbdb9" ];
+  "IApproveAndCall.mint" [ label = "mint", color = "brown", fillcolor = "#ffbdb9" ];
+  "IApproveAndCall.increaseLiquidity" [ label = "increaseLiquidity", color = "brown", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterIMulticall" {
+  graph [ label = "IMulticall  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IMulticall.multicall" [ label = "multicall", color = "brown", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterIMulticallExtended" {
+  graph [ label = "IMulticallExtended  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IMulticallExtended.multicall" [ label = "multicall", color = "brown", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterISelfPermit" {
+  graph [ label = "ISelfPermit  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ISelfPermit.selfPermit" [ label = "selfPermit", color = "brown", fillcolor = "#ffbdb9" ];
+  "ISelfPermit.selfPermitIfNecessary" [ label = "selfPermitIfNecessary", color = "brown", fillcolor = "#ffbdb9" ];
+  "ISelfPermit.selfPermitAllowed" [ label = "selfPermitAllowed", color = "brown", fillcolor = "#ffbdb9" ];
+  "ISelfPermit.selfPermitAllowedIfNecessary" [ label = "selfPermitAllowedIfNecessary", color = "brown", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterISwapRouter02" {
+  graph [ label = "ISwapRouter02  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ISwapRouter02.exactInputSingle" [ label = "exactInputSingle" ];
+}
+
+subgraph "clusterIWETH9" {
+  graph [ label = "IWETH9  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IWETH9.deposit" [ label = "deposit", color = "brown", fillcolor = "#ffbdb9" ];
+  "IWETH9.withdraw" [ label = "withdraw", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterRabbitHoleSwapperTestnet" {
+  graph [ label = "RabbitHoleSwapperTestnet", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "RabbitHoleSwapperTestnet.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "RabbitHoleSwapperTestnet.<Receive Ether>" [ label = "<Receive Ether>", color = "brown", fillcolor = "#ffbdb9" ];
+  "RabbitHoleSwapperTestnet.performSwap" [ label = "performSwap", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterOwnable" {
+  graph [ label = "Ownable", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "Ownable.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "Ownable.owner" [ label = "owner" ];
+  "Ownable.onlyOwner" [ label = "onlyOwner", color = "#1bc6a6", shape =doubleoctagon ];
+  "Ownable.renounceOwnership" [ label = "renounceOwnership", color = "#FF9797", fillcolor = "#FF9797" ];
+  "Ownable.transferOwnership" [ label = "transferOwnership", color = "#FF9797", fillcolor = "#FF9797" ];
+  "Ownable._transferOwnership" [ label = "_transferOwnership" ];
+  "Ownable._msgSender" [ label = "_msgSender" ];
+}
+
+subgraph "clusterContext" {
+  graph [ label = "Context", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "Context._msgSender" [ label = "_msgSender", color = "#f2c383", fillcolor = "#f2c383" ];
+  "Context._msgData" [ label = "_msgData", color = "#f2c383", fillcolor = "#f2c383" ];
+}
+
+subgraph "clusterTransferHelper" {
+  graph [ label = "TransferHelper  (lib)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "TransferHelper.safeTransferFrom" [ label = "safeTransferFrom", color = "#f2c383", fillcolor = "#f2c383" ];
+  "TransferHelper.safeApprove" [ label = "safeApprove", color = "#f2c383", fillcolor = "#f2c383" ];
+  "TransferHelper.safeTransferETH" [ label = "safeTransferETH", color = "#f2c383", fillcolor = "#f2c383" ];
+  "TransferHelper.safeTransfer" [ label = "safeTransfer", color = "#f2c383", fillcolor = "#f2c383" ];
+}
+
+subgraph "clusterRabbitHoleNFTToken" {
+  graph [ label = "RabbitHoleNFTToken", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "RabbitHoleNFTToken.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "RabbitHoleNFTToken.awardItem" [ label = "awardItem", color = "#FF9797", fillcolor = "#FF9797" ];
+  "RabbitHoleNFTToken._mint" [ label = "_mint" ];
+  "RabbitHoleNFTToken._setTokenURI" [ label = "_setTokenURI" ];
+}
+
+subgraph "clusterERC721" {
+  graph [ label = "ERC721", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ERC721.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.supportsInterface" [ label = "supportsInterface", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.balanceOf" [ label = "balanceOf", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.ownerOf" [ label = "ownerOf" ];
+  "ERC721.name" [ label = "name", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.symbol" [ label = "symbol", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.tokenURI" [ label = "tokenURI", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721._baseURI" [ label = "_baseURI" ];
+  "ERC721.approve" [ label = "approve", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.getApproved" [ label = "getApproved", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.setApprovalForAll" [ label = "setApprovalForAll", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.isApprovedForAll" [ label = "isApprovedForAll" ];
+  "ERC721.transferFrom" [ label = "transferFrom", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721.safeTransferFrom" [ label = "safeTransferFrom" ];
+  "ERC721._safeTransfer" [ label = "_safeTransfer" ];
+  "ERC721._exists" [ label = "_exists" ];
+  "ERC721._isApprovedOrOwner" [ label = "_isApprovedOrOwner" ];
+  "ERC721._safeMint" [ label = "_safeMint" ];
+  "ERC721._mint" [ label = "_mint" ];
+  "ERC721._burn" [ label = "_burn", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ERC721._transfer" [ label = "_transfer" ];
+  "ERC721._approve" [ label = "_approve" ];
+  "ERC721._setApprovalForAll" [ label = "_setApprovalForAll" ];
+  "ERC721._checkOnERC721Received" [ label = "_checkOnERC721Received" ];
+  "ERC721._beforeTokenTransfer" [ label = "_beforeTokenTransfer" ];
+  "ERC721._afterTokenTransfer" [ label = "_afterTokenTransfer" ];
+  "ERC721.type" [ label = "type" ];
+  "ERC721._msgSender" [ label = "_msgSender" ];
+}
+
+subgraph "clusterIERC721Metadata" {
+  graph [ label = "IERC721Metadata  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IERC721Metadata.supportsInterface" [ label = "supportsInterface" ];
+  "IERC721Metadata.name" [ label = "name", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721Metadata.symbol" [ label = "symbol", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC721Metadata.tokenURI" [ label = "tokenURI", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterAddress" {
+  graph [ label = "Address  (lib)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "Address.isContract" [ label = "isContract" ];
+  "Address.sendValue" [ label = "sendValue", color = "#f2c383", fillcolor = "#f2c383" ];
+  "Address.functionCall" [ label = "functionCall" ];
+  "Address.functionCallWithValue" [ label = "functionCallWithValue" ];
+  "Address.functionStaticCall" [ label = "functionStaticCall" ];
+  "Address.functionDelegateCall" [ label = "functionDelegateCall" ];
+  "Address.verifyCallResult" [ label = "verifyCallResult" ];
+}
+
+subgraph "clusterStrings" {
+  graph [ label = "Strings  (lib)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "Strings.toString" [ label = "toString", color = "#f2c383", fillcolor = "#f2c383" ];
+  "Strings.toHexString" [ label = "toHexString" ];
+}
+
+subgraph "clusterERC165" {
+  graph [ label = "ERC165", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ERC165.supportsInterface" [ label = "supportsInterface", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC165.type" [ label = "type" ];
+}
+
+subgraph "clusterERC721URIStorage" {
+  graph [ label = "ERC721URIStorage", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ERC721.tokenURI" [ label = "tokenURI", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC721URIStorage._setTokenURI" [ label = "_setTokenURI", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ERC721._burn" [ label = "_burn", color = "#f2c383", fillcolor = "#f2c383" ];
+}
+
+subgraph "clusterCounters" {
+  graph [ label = "Counters  (lib)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "Counters.current" [ label = "current", color = "#f2c383", fillcolor = "#f2c383" ];
+  "Counters.increment" [ label = "increment", color = "#f2c383", fillcolor = "#f2c383" ];
+  "Counters.decrement" [ label = "decrement", color = "#f2c383", fillcolor = "#f2c383" ];
+  "Counters.reset" [ label = "reset", color = "#f2c383", fillcolor = "#f2c383" ];
+}
+
+subgraph "clusterRabbitHoleSwapper" {
+  graph [ label = "RabbitHoleSwapper", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "Ownable.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "RabbitHoleSwapper.<Receive Ether>" [ label = "<Receive Ether>", color = "brown", fillcolor = "#ffbdb9" ];
+  "RabbitHoleSwapper.performSwap" [ label = "performSwap", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterISwapRouter" {
+  graph [ label = "ISwapRouter  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ISwapRouter.ExactInputSingleParams" [ label = "ExactInputSingleParams" ];
+  "ISwapRouter.exactInputSingle" [ label = "exactInputSingle", color = "brown", fillcolor = "#ffbdb9" ];
+  "ISwapRouter.exactInput" [ label = "exactInput", color = "brown", fillcolor = "#ffbdb9" ];
+  "ISwapRouter.exactOutputSingle" [ label = "exactOutputSingle", color = "brown", fillcolor = "#ffbdb9" ];
+  "ISwapRouter.exactOutput" [ label = "exactOutput", color = "brown", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clusterERC20" {
+  graph [ label = "ERC20", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "ERC20.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.name" [ label = "name", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.symbol" [ label = "symbol", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.decimals" [ label = "decimals", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.totalSupply" [ label = "totalSupply", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.balanceOf" [ label = "balanceOf", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.transfer" [ label = "transfer", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.allowance" [ label = "allowance" ];
+  "ERC20.approve" [ label = "approve", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.transferFrom" [ label = "transferFrom", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.increaseAllowance" [ label = "increaseAllowance", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20.decreaseAllowance" [ label = "decreaseAllowance", color = "#FF9797", fillcolor = "#FF9797" ];
+  "ERC20._transfer" [ label = "_transfer" ];
+  "ERC20._mint" [ label = "_mint", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ERC20._burn" [ label = "_burn", color = "#f2c383", fillcolor = "#f2c383" ];
+  "ERC20._approve" [ label = "_approve" ];
+  "ERC20._spendAllowance" [ label = "_spendAllowance" ];
+  "ERC20._beforeTokenTransfer" [ label = "_beforeTokenTransfer" ];
+  "ERC20._afterTokenTransfer" [ label = "_afterTokenTransfer" ];
+  "ERC20._msgSender" [ label = "_msgSender" ];
+  "ERC20.type" [ label = "type" ];
+}
+
+subgraph "clusterIERC20Metadata" {
+  graph [ label = "IERC20Metadata  (iface)", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "IERC20Metadata.name" [ label = "name", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC20Metadata.symbol" [ label = "symbol", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+  "IERC20Metadata.decimals" [ label = "decimals", color = "#ffbdb9", fillcolor = "#ffbdb9" ];
+}
+
+subgraph "clustertoken" {
+  graph [ label = "token", color = "#e8726d", fontcolor = "#f0f0f0", style = "rounded,dashed", bgcolor = "#3b4b63" ];
+  "token.call" [ label = "call" ];
+}
+
+subgraph "clusterCounters.Counter" {
+  graph [ label = "Counters.Counter", color = "#e8726d", fontcolor = "#f0f0f0", style = "rounded,dashed", bgcolor = "#3b4b63" ];
+  "Counters.Counter.increment" [ label = "increment" ];
+  "Counters.Counter.current" [ label = "current" ];
+}
+
+subgraph "clustertokenId" {
+  graph [ label = "tokenId", color = "#e8726d", fontcolor = "#f0f0f0", style = "rounded,dashed", bgcolor = "#3b4b63" ];
+  "tokenId.toString" [ label = "toString" ];
+}
+
+subgraph "clusterto" {
+  graph [ label = "to", color = "#e8726d", fontcolor = "#f0f0f0", style = "rounded,dashed", bgcolor = "#3b4b63" ];
+  "to.isContract" [ label = "isContract" ];
+}
+
+subgraph "clustertarget" {
+  graph [ label = "target", color = "#e8726d", fontcolor = "#f0f0f0", style = "rounded,dashed", bgcolor = "#3b4b63" ];
+  "target.staticcall" [ label = "staticcall" ];
+  "target.delegatecall" [ label = "delegatecall" ];
+}
+
+  "RabbitHoleToken.<Constructor>";
+  "RabbitHoleToken._mint";
+  "RabbitHoleToken.mint";
+  "ItemAuction.auctionOngoing";
+  "ItemAuction._isAuctionOngoing";
+  "ItemAuction.minPriceDoesNotExceedLimit";
+  "ItemAuction._getPortionOfBid";
+  "ItemAuction.bidAmountMeetsBidRequirements";
+  "ItemAuction._doesBidMeetBidRequirements";
+  "ItemAuction.onlyApplicableBuyer";
+  "ItemAuction._isWhitelistedSale";
+  "ItemAuction.minimumBidNotMade";
+  "ItemAuction._isMinimumBidMade";
+  "ItemAuction.paymentAccepted";
+  "ItemAuction._isPaymentAccepted";
+  "ItemAuction.isAuctionOver";
+  "ItemAuction.isNotASale";
+  "ItemAuction._isASale";
+  "ItemAuction._getBidIncreasePercentage";
+  "ItemAuction._isHighestBidderAllowedToPurchaseNFT";
+  "ItemAuction._isHighestBidderWhitelisted";
+  "ItemAuction._isERC20Auction";
+  "ItemAuction._createNewNftAuction";
+  "ItemAuction._setupAuction";
+  "ItemAuction._getAuctionBidPeriod";
+  "ItemAuction._updateOngoingAuction";
+  "ItemAuction._updateAuctionEnd";
+  "ItemAuction.createDefaultNftAuction";
+  "ItemAuction.createNewNftAuction";
+  "ItemAuction.createSale";
+  "ItemAuction._setupSale";
+  "ItemAuction._isABidMade";
+  "ItemAuction._isBuyNowPriceMet";
+  "ItemAuction._transferNftAndPaySeller";
+  "ItemAuction._reverseAndResetPreviousBid";
+  "ItemAuction._makeBid";
+  "ItemAuction._reversePreviousBidAndUpdateHighestBid";
+  "ItemAuction.makeBid";
+  "ItemAuction.makeCustomBid";
+  "ItemAuction._updateHighestBid";
+  "ItemAuction._resetBids";
+  "ItemAuction._payout";
+  "ItemAuction._getNftRecipient";
+  "ItemAuction._payFeesAndSeller";
+  "NftContractInterface.awardItem";
+  "ItemAuction._resetAuction";
+  "ItemAuction.payable";
+  "ItemAuction.settleAuction";
+  "ItemAuction.withdrawAuction";
+  "ItemAuction.withdrawBid";
+  "ItemAuction.updateWhitelistedBuyer";
+  "ItemAuction.updateMinimumPrice";
+  "ItemAuction.updateBuyNowPrice";
+  "ItemAuction.takeHighestBid";
+  "NFTAuction.isAuctionNotStartedByOwner";
+  "NFTAuction._resetAuction";
+  "NFTAuction.auctionOngoing";
+  "NFTAuction._isAuctionOngoing";
+  "NFTAuction.minPriceDoesNotExceedLimit";
+  "NFTAuction._getPortionOfBid";
+  "NFTAuction.bidAmountMeetsBidRequirements";
+  "NFTAuction._doesBidMeetBidRequirements";
+  "NFTAuction.onlyApplicableBuyer";
+  "NFTAuction._isWhitelistedSale";
+  "NFTAuction.minimumBidNotMade";
+  "NFTAuction._isMinimumBidMade";
+  "NFTAuction.paymentAccepted";
+  "NFTAuction._isPaymentAccepted";
+  "NFTAuction.isAuctionOver";
+  "NFTAuction.isNotASale";
+  "NFTAuction._isASale";
+  "NFTAuction._getBidIncreasePercentage";
+  "NFTAuction._isHighestBidderAllowedToPurchaseNFT";
+  "NFTAuction._isHighestBidderWhitelisted";
+  "NFTAuction._isERC20Auction";
+  "NFTAuction._createNewNftAuction";
+  "NFTAuction._setupAuction";
+  "NFTAuction._getAuctionBidPeriod";
+  "NFTAuction._updateOngoingAuction";
+  "NFTAuction._transferNftToAuctionContract";
+  "NFTAuction._updateAuctionEnd";
+  "NFTAuction.createDefaultNftAuction";
+  "NFTAuction.createNewNftAuction";
+  "NFTAuction.createSale";
+  "NFTAuction._setupSale";
+  "NFTAuction._isABidMade";
+  "NFTAuction._isBuyNowPriceMet";
+  "NFTAuction._transferNftAndPaySeller";
+  "NFTAuction._reverseAndResetPreviousBid";
+  "NFTAuction._makeBid";
+  "NFTAuction._reversePreviousBidAndUpdateHighestBid";
+  "NFTAuction.makeBid";
+  "NFTAuction.makeCustomBid";
+  "NFTAuction._updateHighestBid";
+  "NFTAuction._resetBids";
+  "NFTAuction._payout";
+  "NFTAuction._getNftRecipient";
+  "NFTAuction._payFeesAndSeller";
+  "NFTAuction.payable";
+  "NFTAuction.settleAuction";
+  "NFTAuction.withdrawAuction";
+  "NFTAuction.withdrawBid";
+  "NFTAuction.updateWhitelistedBuyer";
+  "NFTAuction.updateMinimumPrice";
+  "NFTAuction.updateBuyNowPrice";
+  "NFTAuction.takeHighestBid";
+  "RabbitHoleSwapperTestnet.performSwap";
+  "TransferHelper.safeTransferFrom";
+  "TransferHelper.safeApprove";
+  "IV3SwapRouter.ExactInputSingleParams";
+  "ISwapRouter02.exactInputSingle";
+  "TransferHelper.safeTransferETH";
+  "Ownable.<Constructor>";
+  "Ownable._transferOwnership";
+  "Ownable._msgSender";
+  "Ownable.onlyOwner";
+  "Ownable.owner";
+  "Ownable.renounceOwnership";
+  "Ownable.transferOwnership";
+  "token.call";
+  "TransferHelper.safeTransfer";
+  "RabbitHoleNFTToken.awardItem";
+  "Counters.Counter.increment";
+  "Counters.Counter.current";
+  "RabbitHoleNFTToken._mint";
+  "RabbitHoleNFTToken._setTokenURI";
+  "ERC721.supportsInterface";
+  "ERC721.type";
+  "IERC721Metadata.supportsInterface";
+  "ERC721.tokenURI";
+  "ERC721._exists";
+  "ERC721._baseURI";
+  "tokenId.toString";
+  "ERC721.approve";
+  "ERC721.ownerOf";
+  "ERC721._msgSender";
+  "ERC721.isApprovedForAll";
+  "ERC721._approve";
+  "ERC721.getApproved";
+  "ERC721.setApprovalForAll";
+  "ERC721._setApprovalForAll";
+  "ERC721.transferFrom";
+  "ERC721._isApprovedOrOwner";
+  "ERC721._transfer";
+  "ERC721.safeTransferFrom";
+  "ERC721._safeTransfer";
+  "ERC721._checkOnERC721Received";
+  "ERC721._safeMint";
+  "ERC721._mint";
+  "ERC721._beforeTokenTransfer";
+  "ERC721._afterTokenTransfer";
+  "ERC721._burn";
+  "to.isContract";
+  "Address.functionCall";
+  "Address.functionCallWithValue";
+  "Address.isContract";
+  "Address.verifyCallResult";
+  "Address.functionStaticCall";
+  "target.staticcall";
+  "Address.functionDelegateCall";
+  "target.delegatecall";
+  "Strings.toHexString";
+  "ERC165.supportsInterface";
+  "ERC165.type";
+  "ERC721URIStorage._setTokenURI";
+  "RabbitHoleSwapper.performSwap";
+  "ISwapRouter.ExactInputSingleParams";
+  "ISwapRouter.exactInputSingle";
+  "ERC20.transfer";
+  "ERC20._msgSender";
+  "ERC20._transfer";
+  "ERC20.approve";
+  "ERC20._approve";
+  "ERC20.transferFrom";
+  "ERC20._spendAllowance";
+  "ERC20.increaseAllowance";
+  "ERC20.decreaseAllowance";
+  "ERC20._beforeTokenTransfer";
+  "ERC20._afterTokenTransfer";
+  "ERC20._mint";
+  "ERC20._burn";
+  "ERC20.allowance";
+  "ERC20.type";
+  "RabbitHoleToken.<Constructor>" -> "RabbitHoleToken._mint" [ color = "#1bc6a6" ];
+  "RabbitHoleToken.mint" -> "RabbitHoleToken._mint" [ color = "#1bc6a6" ];
+  "RabbitHoleToken.mint" -> "RabbitHoleToken._mint" [ color = "#1bc6a6" ];
+  "ItemAuction.auctionOngoing" -> "ItemAuction._isAuctionOngoing" [ color = "#1bc6a6" ];
+  "ItemAuction.minPriceDoesNotExceedLimit" -> "ItemAuction._getPortionOfBid" [ color = "#1bc6a6" ];
+  "ItemAuction.bidAmountMeetsBidRequirements" -> "ItemAuction._doesBidMeetBidRequirements" [ color = "#1bc6a6" ];
+  "ItemAuction.onlyApplicableBuyer" -> "ItemAuction._isWhitelistedSale" [ color = "#1bc6a6" ];
+  "ItemAuction.minimumBidNotMade" -> "ItemAuction._isMinimumBidMade" [ color = "#1bc6a6" ];
+  "ItemAuction.paymentAccepted" -> "ItemAuction._isPaymentAccepted" [ color = "#1bc6a6" ];
+  "ItemAuction.isAuctionOver" -> "ItemAuction._isAuctionOngoing" [ color = "#1bc6a6" ];
+  "ItemAuction.isNotASale" -> "ItemAuction._isASale" [ color = "#1bc6a6" ];
+  "ItemAuction._doesBidMeetBidRequirements" -> "ItemAuction._getBidIncreasePercentage" [ color = "#1bc6a6" ];
+  "ItemAuction._isHighestBidderAllowedToPurchaseNFT" -> "ItemAuction._isWhitelistedSale" [ color = "#1bc6a6" ];
+  "ItemAuction._isHighestBidderAllowedToPurchaseNFT" -> "ItemAuction._isHighestBidderWhitelisted" [ color = "#1bc6a6" ];
+  "ItemAuction._isPaymentAccepted" -> "ItemAuction._isERC20Auction" [ color = "#1bc6a6" ];
+  "ItemAuction._createNewNftAuction" -> "ItemAuction._setupAuction" [ color = "#1bc6a6" ];
+  "ItemAuction._createNewNftAuction" -> "ItemAuction._getAuctionBidPeriod" [ color = "#1bc6a6" ];
+  "ItemAuction._createNewNftAuction" -> "ItemAuction._getBidIncreasePercentage" [ color = "#1bc6a6" ];
+  "ItemAuction._createNewNftAuction" -> "ItemAuction._updateOngoingAuction" [ color = "#1bc6a6" ];
+  "ItemAuction._createNewNftAuction" -> "ItemAuction._updateAuctionEnd" [ color = "#1bc6a6" ];
+  "ItemAuction.createDefaultNftAuction" -> "ItemAuction._createNewNftAuction" [ color = "#1bc6a6" ];
+  "ItemAuction.createNewNftAuction" -> "ItemAuction._createNewNftAuction" [ color = "#1bc6a6" ];
+  "ItemAuction.createSale" -> "ItemAuction._setupSale" [ color = "#1bc6a6" ];
+  "ItemAuction.createSale" -> "ItemAuction._isABidMade" [ color = "#1bc6a6" ];
+  "ItemAuction.createSale" -> "ItemAuction._isHighestBidderAllowedToPurchaseNFT" [ color = "#1bc6a6" ];
+  "ItemAuction.createSale" -> "ItemAuction._isBuyNowPriceMet" [ color = "#1bc6a6" ];
+  "ItemAuction.createSale" -> "ItemAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "ItemAuction.createSale" -> "ItemAuction._reverseAndResetPreviousBid" [ color = "#1bc6a6" ];
+  "ItemAuction._makeBid" -> "ItemAuction._reversePreviousBidAndUpdateHighestBid" [ color = "#1bc6a6" ];
+  "ItemAuction._makeBid" -> "ItemAuction._updateOngoingAuction" [ color = "#1bc6a6" ];
+  "ItemAuction.makeBid" -> "ItemAuction._makeBid" [ color = "#1bc6a6" ];
+  "ItemAuction.makeCustomBid" -> "ItemAuction._makeBid" [ color = "#1bc6a6" ];
+  "ItemAuction._updateOngoingAuction" -> "ItemAuction._isBuyNowPriceMet" [ color = "#1bc6a6" ];
+  "ItemAuction._updateOngoingAuction" -> "ItemAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "ItemAuction._updateAuctionEnd" -> "ItemAuction._getAuctionBidPeriod" [ color = "#1bc6a6" ];
+  "ItemAuction._updateHighestBid" -> "ItemAuction._isERC20Auction" [ color = "#1bc6a6" ];
+  "ItemAuction._reverseAndResetPreviousBid" -> "ItemAuction._resetBids" [ color = "#1bc6a6" ];
+  "ItemAuction._reverseAndResetPreviousBid" -> "ItemAuction._payout" [ color = "#1bc6a6" ];
+  "ItemAuction._reversePreviousBidAndUpdateHighestBid" -> "ItemAuction._updateHighestBid" [ color = "#1bc6a6" ];
+  "ItemAuction._reversePreviousBidAndUpdateHighestBid" -> "ItemAuction._payout" [ color = "#1bc6a6" ];
+  "ItemAuction._transferNftAndPaySeller" -> "ItemAuction._getNftRecipient" [ color = "#1bc6a6" ];
+  "ItemAuction._transferNftAndPaySeller" -> "ItemAuction._resetBids" [ color = "#1bc6a6" ];
+  "ItemAuction._transferNftAndPaySeller" -> "ItemAuction._payFeesAndSeller" [ color = "#1bc6a6" ];
+  "ItemAuction._transferNftAndPaySeller" -> "NftContractInterface.awardItem" [ color = "white" ];
+  "ItemAuction._transferNftAndPaySeller" -> "ItemAuction._resetAuction" [ color = "#1bc6a6" ];
+  "ItemAuction._payFeesAndSeller" -> "ItemAuction._getPortionOfBid" [ color = "#1bc6a6" ];
+  "ItemAuction._payFeesAndSeller" -> "ItemAuction._payout" [ color = "#1bc6a6" ];
+  "ItemAuction._payFeesAndSeller" -> "ItemAuction._payout" [ color = "#1bc6a6" ];
+  "ItemAuction._payout" -> "ItemAuction._isERC20Auction" [ color = "#1bc6a6" ];
+  "ItemAuction._payout" -> "ItemAuction.payable" [ color = "#1bc6a6" ];
+  "ItemAuction.settleAuction" -> "ItemAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "ItemAuction.withdrawAuction" -> "ItemAuction._resetAuction" [ color = "#1bc6a6" ];
+  "ItemAuction.withdrawBid" -> "ItemAuction._resetBids" [ color = "#1bc6a6" ];
+  "ItemAuction.withdrawBid" -> "ItemAuction._payout" [ color = "#1bc6a6" ];
+  "ItemAuction.updateWhitelistedBuyer" -> "ItemAuction._isASale" [ color = "#1bc6a6" ];
+  "ItemAuction.updateWhitelistedBuyer" -> "ItemAuction._resetBids" [ color = "#1bc6a6" ];
+  "ItemAuction.updateWhitelistedBuyer" -> "ItemAuction._payout" [ color = "#1bc6a6" ];
+  "ItemAuction.updateMinimumPrice" -> "ItemAuction._isMinimumBidMade" [ color = "#1bc6a6" ];
+  "ItemAuction.updateMinimumPrice" -> "ItemAuction._updateAuctionEnd" [ color = "#1bc6a6" ];
+  "ItemAuction.updateBuyNowPrice" -> "ItemAuction._isBuyNowPriceMet" [ color = "#1bc6a6" ];
+  "ItemAuction.updateBuyNowPrice" -> "ItemAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "ItemAuction.takeHighestBid" -> "ItemAuction._isABidMade" [ color = "#1bc6a6" ];
+  "ItemAuction.takeHighestBid" -> "ItemAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "NFTAuction.isAuctionNotStartedByOwner" -> "NFTAuction._resetAuction" [ color = "#1bc6a6" ];
+  "NFTAuction.auctionOngoing" -> "NFTAuction._isAuctionOngoing" [ color = "#1bc6a6" ];
+  "NFTAuction.minPriceDoesNotExceedLimit" -> "NFTAuction._getPortionOfBid" [ color = "#1bc6a6" ];
+  "NFTAuction.bidAmountMeetsBidRequirements" -> "NFTAuction._doesBidMeetBidRequirements" [ color = "#1bc6a6" ];
+  "NFTAuction.onlyApplicableBuyer" -> "NFTAuction._isWhitelistedSale" [ color = "#1bc6a6" ];
+  "NFTAuction.minimumBidNotMade" -> "NFTAuction._isMinimumBidMade" [ color = "#1bc6a6" ];
+  "NFTAuction.paymentAccepted" -> "NFTAuction._isPaymentAccepted" [ color = "#1bc6a6" ];
+  "NFTAuction.isAuctionOver" -> "NFTAuction._isAuctionOngoing" [ color = "#1bc6a6" ];
+  "NFTAuction.isNotASale" -> "NFTAuction._isASale" [ color = "#1bc6a6" ];
+  "NFTAuction._doesBidMeetBidRequirements" -> "NFTAuction._getBidIncreasePercentage" [ color = "#1bc6a6" ];
+  "NFTAuction._isHighestBidderAllowedToPurchaseNFT" -> "NFTAuction._isWhitelistedSale" [ color = "#1bc6a6" ];
+  "NFTAuction._isHighestBidderAllowedToPurchaseNFT" -> "NFTAuction._isHighestBidderWhitelisted" [ color = "#1bc6a6" ];
+  "NFTAuction._isPaymentAccepted" -> "NFTAuction._isERC20Auction" [ color = "#1bc6a6" ];
+  "NFTAuction._createNewNftAuction" -> "NFTAuction._setupAuction" [ color = "#1bc6a6" ];
+  "NFTAuction._createNewNftAuction" -> "NFTAuction._getAuctionBidPeriod" [ color = "#1bc6a6" ];
+  "NFTAuction._createNewNftAuction" -> "NFTAuction._getBidIncreasePercentage" [ color = "#1bc6a6" ];
+  "NFTAuction._createNewNftAuction" -> "NFTAuction._updateOngoingAuction" [ color = "#1bc6a6" ];
+  "NFTAuction._createNewNftAuction" -> "NFTAuction._isMinimumBidMade" [ color = "#1bc6a6" ];
+  "NFTAuction._createNewNftAuction" -> "NFTAuction._transferNftToAuctionContract" [ color = "#1bc6a6" ];
+  "NFTAuction._createNewNftAuction" -> "NFTAuction._updateAuctionEnd" [ color = "#1bc6a6" ];
+  "NFTAuction.createDefaultNftAuction" -> "NFTAuction._createNewNftAuction" [ color = "#1bc6a6" ];
+  "NFTAuction.createNewNftAuction" -> "NFTAuction._createNewNftAuction" [ color = "#1bc6a6" ];
+  "NFTAuction.createSale" -> "NFTAuction._setupSale" [ color = "#1bc6a6" ];
+  "NFTAuction.createSale" -> "NFTAuction._isABidMade" [ color = "#1bc6a6" ];
+  "NFTAuction.createSale" -> "NFTAuction._isHighestBidderAllowedToPurchaseNFT" [ color = "#1bc6a6" ];
+  "NFTAuction.createSale" -> "NFTAuction._isBuyNowPriceMet" [ color = "#1bc6a6" ];
+  "NFTAuction.createSale" -> "NFTAuction._transferNftToAuctionContract" [ color = "#1bc6a6" ];
+  "NFTAuction.createSale" -> "NFTAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "NFTAuction.createSale" -> "NFTAuction._reverseAndResetPreviousBid" [ color = "#1bc6a6" ];
+  "NFTAuction._makeBid" -> "NFTAuction._reversePreviousBidAndUpdateHighestBid" [ color = "#1bc6a6" ];
+  "NFTAuction._makeBid" -> "NFTAuction._updateOngoingAuction" [ color = "#1bc6a6" ];
+  "NFTAuction._makeBid" -> "NFTAuction._isMinimumBidMade" [ color = "#1bc6a6" ];
+  "NFTAuction._makeBid" -> "NFTAuction._transferNftToAuctionContract" [ color = "#1bc6a6" ];
+  "NFTAuction.makeBid" -> "NFTAuction._makeBid" [ color = "#1bc6a6" ];
+  "NFTAuction.makeCustomBid" -> "NFTAuction._makeBid" [ color = "#1bc6a6" ];
+  "NFTAuction._updateOngoingAuction" -> "NFTAuction._isBuyNowPriceMet" [ color = "#1bc6a6" ];
+  "NFTAuction._updateOngoingAuction" -> "NFTAuction._transferNftToAuctionContract" [ color = "#1bc6a6" ];
+  "NFTAuction._updateOngoingAuction" -> "NFTAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "NFTAuction._updateAuctionEnd" -> "NFTAuction._getAuctionBidPeriod" [ color = "#1bc6a6" ];
+  "NFTAuction._updateHighestBid" -> "NFTAuction._isERC20Auction" [ color = "#1bc6a6" ];
+  "NFTAuction._reverseAndResetPreviousBid" -> "NFTAuction._resetBids" [ color = "#1bc6a6" ];
+  "NFTAuction._reverseAndResetPreviousBid" -> "NFTAuction._payout" [ color = "#1bc6a6" ];
+  "NFTAuction._reversePreviousBidAndUpdateHighestBid" -> "NFTAuction._updateHighestBid" [ color = "#1bc6a6" ];
+  "NFTAuction._reversePreviousBidAndUpdateHighestBid" -> "NFTAuction._payout" [ color = "#1bc6a6" ];
+  "NFTAuction._transferNftAndPaySeller" -> "NFTAuction._getNftRecipient" [ color = "#1bc6a6" ];
+  "NFTAuction._transferNftAndPaySeller" -> "NFTAuction._resetBids" [ color = "#1bc6a6" ];
+  "NFTAuction._transferNftAndPaySeller" -> "NFTAuction._payFeesAndSeller" [ color = "#1bc6a6" ];
+  "NFTAuction._transferNftAndPaySeller" -> "NFTAuction._resetAuction" [ color = "#1bc6a6" ];
+  "NFTAuction._payFeesAndSeller" -> "NFTAuction._getPortionOfBid" [ color = "#1bc6a6" ];
+  "NFTAuction._payFeesAndSeller" -> "NFTAuction._payout" [ color = "#1bc6a6" ];
+  "NFTAuction._payFeesAndSeller" -> "NFTAuction._payout" [ color = "#1bc6a6" ];
+  "NFTAuction._payout" -> "NFTAuction._isERC20Auction" [ color = "#1bc6a6" ];
+  "NFTAuction._payout" -> "NFTAuction.payable" [ color = "#1bc6a6" ];
+  "NFTAuction.settleAuction" -> "NFTAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "NFTAuction.withdrawAuction" -> "NFTAuction._resetAuction" [ color = "#1bc6a6" ];
+  "NFTAuction.withdrawBid" -> "NFTAuction._resetBids" [ color = "#1bc6a6" ];
+  "NFTAuction.withdrawBid" -> "NFTAuction._payout" [ color = "#1bc6a6" ];
+  "NFTAuction.updateWhitelistedBuyer" -> "NFTAuction._isASale" [ color = "#1bc6a6" ];
+  "NFTAuction.updateWhitelistedBuyer" -> "NFTAuction._resetBids" [ color = "#1bc6a6" ];
+  "NFTAuction.updateWhitelistedBuyer" -> "NFTAuction._payout" [ color = "#1bc6a6" ];
+  "NFTAuction.updateMinimumPrice" -> "NFTAuction._isMinimumBidMade" [ color = "#1bc6a6" ];
+  "NFTAuction.updateMinimumPrice" -> "NFTAuction._transferNftToAuctionContract" [ color = "#1bc6a6" ];
+  "NFTAuction.updateMinimumPrice" -> "NFTAuction._updateAuctionEnd" [ color = "#1bc6a6" ];
+  "NFTAuction.updateBuyNowPrice" -> "NFTAuction._isBuyNowPriceMet" [ color = "#1bc6a6" ];
+  "NFTAuction.updateBuyNowPrice" -> "NFTAuction._transferNftToAuctionContract" [ color = "#1bc6a6" ];
+  "NFTAuction.updateBuyNowPrice" -> "NFTAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "NFTAuction.takeHighestBid" -> "NFTAuction._isABidMade" [ color = "#1bc6a6" ];
+  "NFTAuction.takeHighestBid" -> "NFTAuction._transferNftToAuctionContract" [ color = "#1bc6a6" ];
+  "NFTAuction.takeHighestBid" -> "NFTAuction._transferNftAndPaySeller" [ color = "#1bc6a6" ];
+  "RabbitHoleSwapperTestnet.performSwap" -> "TransferHelper.safeTransferFrom" [ color = "white" ];
+  "RabbitHoleSwapperTestnet.performSwap" -> "TransferHelper.safeApprove" [ color = "white" ];
+  "RabbitHoleSwapperTestnet.performSwap" -> "IV3SwapRouter.ExactInputSingleParams" [ color = "white" ];
+  "RabbitHoleSwapperTestnet.performSwap" -> "ISwapRouter02.exactInputSingle" [ color = "white" ];
+  "RabbitHoleSwapperTestnet.performSwap" -> "TransferHelper.safeTransferETH" [ color = "white" ];
+  "Ownable.<Constructor>" -> "Ownable._transferOwnership" [ color = "#1bc6a6" ];
+  "Ownable.<Constructor>" -> "Ownable._msgSender" [ color = "#1bc6a6" ];
+  "Ownable.onlyOwner" -> "Ownable.owner" [ color = "#1bc6a6" ];
+  "Ownable.onlyOwner" -> "Ownable._msgSender" [ color = "#1bc6a6" ];
+  "Ownable.renounceOwnership" -> "Ownable._transferOwnership" [ color = "#1bc6a6" ];
+  "Ownable.transferOwnership" -> "Ownable._transferOwnership" [ color = "#1bc6a6" ];
+  "TransferHelper.safeTransferFrom" -> "token.call" [ color = "white" ];
+  "TransferHelper.safeTransfer" -> "token.call" [ color = "white" ];
+  "TransferHelper.safeApprove" -> "token.call" [ color = "white" ];
+  "RabbitHoleNFTToken.awardItem" -> "Counters.Counter.increment" [ color = "white" ];
+  "RabbitHoleNFTToken.awardItem" -> "Counters.Counter.current" [ color = "white" ];
+  "RabbitHoleNFTToken.awardItem" -> "RabbitHoleNFTToken._mint" [ color = "#1bc6a6" ];
+  "RabbitHoleNFTToken.awardItem" -> "RabbitHoleNFTToken._setTokenURI" [ color = "#1bc6a6" ];
+  "ERC721.supportsInterface" -> "ERC721.type" [ color = "#1bc6a6" ];
+  "ERC721.supportsInterface" -> "ERC721.type" [ color = "#1bc6a6" ];
+  "ERC721.supportsInterface" -> "IERC721Metadata.supportsInterface" [ color = "white" ];
+  "ERC721.tokenURI" -> "ERC721._exists" [ color = "#1bc6a6" ];
+  "ERC721.tokenURI" -> "ERC721._baseURI" [ color = "#1bc6a6" ];
+  "ERC721.tokenURI" -> "tokenId.toString" [ color = "white" ];
+  "ERC721.approve" -> "ERC721.ownerOf" [ color = "white" ];
+  "ERC721.approve" -> "ERC721._msgSender" [ color = "#1bc6a6" ];
+  "ERC721.approve" -> "ERC721.isApprovedForAll" [ color = "#1bc6a6" ];
+  "ERC721.approve" -> "ERC721._msgSender" [ color = "#1bc6a6" ];
+  "ERC721.approve" -> "ERC721._approve" [ color = "#1bc6a6" ];
+  "ERC721.getApproved" -> "ERC721._exists" [ color = "#1bc6a6" ];
+  "ERC721.setApprovalForAll" -> "ERC721._setApprovalForAll" [ color = "#1bc6a6" ];
+  "ERC721.setApprovalForAll" -> "ERC721._msgSender" [ color = "#1bc6a6" ];
+  "ERC721.transferFrom" -> "ERC721._isApprovedOrOwner" [ color = "#1bc6a6" ];
+  "ERC721.transferFrom" -> "ERC721._msgSender" [ color = "#1bc6a6" ];
+  "ERC721.transferFrom" -> "ERC721._transfer" [ color = "#1bc6a6" ];
+  "ERC721.safeTransferFrom" -> "ERC721.safeTransferFrom" [ color = "#1bc6a6" ];
+  "ERC721.safeTransferFrom" -> "ERC721._isApprovedOrOwner" [ color = "#1bc6a6" ];
+  "ERC721.safeTransferFrom" -> "ERC721._msgSender" [ color = "#1bc6a6" ];
+  "ERC721.safeTransferFrom" -> "ERC721._safeTransfer" [ color = "#1bc6a6" ];
+  "ERC721._safeTransfer" -> "ERC721._transfer" [ color = "#1bc6a6" ];
+  "ERC721._safeTransfer" -> "ERC721._checkOnERC721Received" [ color = "#1bc6a6" ];
+  "ERC721._isApprovedOrOwner" -> "ERC721._exists" [ color = "#1bc6a6" ];
+  "ERC721._isApprovedOrOwner" -> "ERC721.ownerOf" [ color = "white" ];
+  "ERC721._isApprovedOrOwner" -> "ERC721.getApproved" [ color = "#1bc6a6" ];
+  "ERC721._isApprovedOrOwner" -> "ERC721.isApprovedForAll" [ color = "#1bc6a6" ];
+  "ERC721._safeMint" -> "ERC721._safeMint" [ color = "#1bc6a6" ];
+  "ERC721._safeMint" -> "ERC721._mint" [ color = "#1bc6a6" ];
+  "ERC721._safeMint" -> "ERC721._checkOnERC721Received" [ color = "#1bc6a6" ];
+  "ERC721._mint" -> "ERC721._exists" [ color = "#1bc6a6" ];
+  "ERC721._mint" -> "ERC721._beforeTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC721._mint" -> "ERC721._afterTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC721._burn" -> "ERC721.ownerOf" [ color = "white" ];
+  "ERC721._burn" -> "ERC721._beforeTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC721._burn" -> "ERC721._approve" [ color = "#1bc6a6" ];
+  "ERC721._burn" -> "ERC721._afterTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC721._transfer" -> "ERC721.ownerOf" [ color = "white" ];
+  "ERC721._transfer" -> "ERC721._beforeTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC721._transfer" -> "ERC721._approve" [ color = "#1bc6a6" ];
+  "ERC721._transfer" -> "ERC721._afterTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC721._approve" -> "ERC721.ownerOf" [ color = "white" ];
+  "ERC721._checkOnERC721Received" -> "to.isContract" [ color = "white" ];
+  "ERC721._checkOnERC721Received" -> "ERC721._msgSender" [ color = "#1bc6a6" ];
+  "Address.functionCall" -> "Address.functionCall" [ color = "#1bc6a6" ];
+  "Address.functionCall" -> "Address.functionCallWithValue" [ color = "#1bc6a6" ];
+  "Address.functionCallWithValue" -> "Address.functionCallWithValue" [ color = "#1bc6a6" ];
+  "Address.functionCallWithValue" -> "Address.isContract" [ color = "#1bc6a6" ];
+  "Address.functionCallWithValue" -> "Address.verifyCallResult" [ color = "#1bc6a6" ];
+  "Address.functionStaticCall" -> "Address.functionStaticCall" [ color = "#1bc6a6" ];
+  "Address.functionStaticCall" -> "Address.isContract" [ color = "#1bc6a6" ];
+  "Address.functionStaticCall" -> "target.staticcall" [ color = "white" ];
+  "Address.functionStaticCall" -> "Address.verifyCallResult" [ color = "#1bc6a6" ];
+  "Address.functionDelegateCall" -> "Address.functionDelegateCall" [ color = "#1bc6a6" ];
+  "Address.functionDelegateCall" -> "Address.isContract" [ color = "#1bc6a6" ];
+  "Address.functionDelegateCall" -> "target.delegatecall" [ color = "white" ];
+  "Address.functionDelegateCall" -> "Address.verifyCallResult" [ color = "#1bc6a6" ];
+  "Strings.toHexString" -> "Strings.toHexString" [ color = "#1bc6a6" ];
+  "ERC165.supportsInterface" -> "ERC165.type" [ color = "#1bc6a6" ];
+  "ERC721.tokenURI" -> "ERC721._exists" [ color = "#1bc6a6" ];
+  "ERC721.tokenURI" -> "ERC721._baseURI" [ color = "#1bc6a6" ];
+  "ERC721.tokenURI" -> "ERC721.tokenURI" [ color = "white" ];
+  "ERC721URIStorage._setTokenURI" -> "ERC721._exists" [ color = "#1bc6a6" ];
+  "ERC721._burn" -> "ERC721._burn" [ color = "white" ];
+  "RabbitHoleSwapper.performSwap" -> "TransferHelper.safeTransferFrom" [ color = "white" ];
+  "RabbitHoleSwapper.performSwap" -> "TransferHelper.safeApprove" [ color = "white" ];
+  "RabbitHoleSwapper.performSwap" -> "ISwapRouter.ExactInputSingleParams" [ color = "white" ];
+  "RabbitHoleSwapper.performSwap" -> "ISwapRouter.exactInputSingle" [ color = "white" ];
+  "RabbitHoleSwapper.performSwap" -> "TransferHelper.safeTransferETH" [ color = "white" ];
+  "ERC20.transfer" -> "ERC20._msgSender" [ color = "#1bc6a6" ];
+  "ERC20.transfer" -> "ERC20._transfer" [ color = "#1bc6a6" ];
+  "ERC20.approve" -> "ERC20._msgSender" [ color = "#1bc6a6" ];
+  "ERC20.approve" -> "ERC20._approve" [ color = "#1bc6a6" ];
+  "ERC20.transferFrom" -> "ERC20._msgSender" [ color = "#1bc6a6" ];
+  "ERC20.transferFrom" -> "ERC20._spendAllowance" [ color = "#1bc6a6" ];
+  "ERC20.transferFrom" -> "ERC20._transfer" [ color = "#1bc6a6" ];
+  "ERC20.increaseAllowance" -> "ERC20._msgSender" [ color = "#1bc6a6" ];
+  "ERC20.increaseAllowance" -> "ERC20._approve" [ color = "#1bc6a6" ];
+  "ERC20.decreaseAllowance" -> "ERC20._msgSender" [ color = "#1bc6a6" ];
+  "ERC20.decreaseAllowance" -> "ERC20._approve" [ color = "#1bc6a6" ];
+  "ERC20._transfer" -> "ERC20._beforeTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC20._transfer" -> "ERC20._afterTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC20._mint" -> "ERC20._beforeTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC20._mint" -> "ERC20._afterTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC20._burn" -> "ERC20._beforeTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC20._burn" -> "ERC20._afterTokenTransfer" [ color = "#1bc6a6" ];
+  "ERC20._spendAllowance" -> "ERC20.allowance" [ color = "#1bc6a6" ];
+  "ERC20._spendAllowance" -> "ERC20.type" [ color = "#1bc6a6" ];
+  "ERC20._spendAllowance" -> "ERC20._approve" [ color = "#1bc6a6" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="#445773">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="#e8726d">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="#1bc6a6"]
+key:i2:e -> key2:i2:w [color="white"]
+}
+}

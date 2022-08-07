@@ -1,17 +1,17 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity 0.8.4;
+pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
+//import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-/// @title An Auction Contract for bidding and selling single and batched NFTs
-/// @author Avo Labs GmbH
-/// @notice This contract can be used for auctioning any NFTs, and accepts any ERC20 token as payment
+
 contract NFTAuction {
     mapping(address => mapping(uint256 => Auction)) public nftContractAuctions;
     mapping(address => uint256) failedTransferCredits;
+    // bool whitelistedBuyerexist;
+    mapping(uint256 =>mapping(address => bool)) public isAddressWhitelisted;
     //Each Auction is unique to each NFT (contract + id pairing).
     struct Auction {
         //map token ID to
@@ -28,7 +28,7 @@ contract NFTAuction {
         address ERC20Token; // The seller can specify an ERC20 token that can be used to bid or purchase the NFT.
         address[] feeRecipients;
         uint32[] feePercentages;
-        mapping(address => bool) whitelistedBuyerexist;
+        uint256 auctionId;
     }
     /*
      * Default values that are used if not specified by the NFT seller.
@@ -61,7 +61,7 @@ contract NFTAuction {
         address nftSeller,
         address erc20Token,
         uint128 buyNowPrice,
-        address whitelistedBuyers,
+        address[] whitelistedBuyers,
         address[] feeRecipients,
         uint32[] feePercentages
     );
@@ -229,10 +229,7 @@ contract NFTAuction {
         uint256 _tokenId
     ) {
         require(
-            !_isWhitelistedSale(_nftContractAddress, _tokenId) ||
-                nftContractAuctions[_nftContractAddress][_tokenId]
-                    .whitelistedBuyers[msg.sender] ==
-                true,
+            (!_isWhitelistedSale(_nftContractAddress, _tokenId) || (isAddressWhitelisted[_tokenId][msg.sender]==true)),//(nftContractAuctions[_nftContractAddress][_tokenId].whitelistedBuyerexist[msg.sender] == true),
             "Only the whitelisted buyer"
         );
         _;
@@ -441,9 +438,7 @@ contract NFTAuction {
         view
         returns (bool)
     {
-        return (nftContractAuctions[_nftContractAddress][_tokenId]
-            .whitelistedBuyers
-            .length() > 0);
+        return (nftContractAuctions[_nftContractAddress][_tokenId].whitelistedBuyers.length > 0);
     }
 
     /*
@@ -464,8 +459,7 @@ contract NFTAuction {
         address _nftContractAddress,
         uint256 _tokenId
     ) internal view returns (bool) {
-        return (nftContractAuctions[_nftContractAddress][_tokenId].whitelistedBuyerexist
-        [nftContractAuctions[_nftContractAddress][_tokenId].nftHighestBidder]);
+        return (isAddressWhitelisted[_tokenId][nftContractAuctions[_nftContractAddress][_tokenId].nftHighestBidder]);
     }
 
     /**
@@ -734,37 +728,66 @@ contract NFTAuction {
         );
     }
 
+    // function createNewNftAuction(
+    //     address _nftContractAddress,
+    //     uint256 _tokenId,
+    //     address _erc20Token,
+    //     uint128 _minPrice,
+    //     uint128 _buyNowPrice,
+    //     uint32 _auctionBidPeriod, //this is the time that the auction lasts 
+    //     uint32 _bidIncreasePercentage,
+    //     address[] memory _whitelistedBuyers,//<<<<<<<added this line
+    //     address[] memory _feeRecipients,
+    //     uint32[] memory _feePercentages
+    // )
+    //     external
+    //     isAuctionNotStartedByOwner(_nftContractAddress, _tokenId)
+    //     priceGreaterThanZero(_minPrice)
+    //     increasePercentageAboveMinimum(_bidIncreasePercentage)
+    // {
+    //     nftContractAuctions auction = nftContractAuctions[_nftContractAddress][_tokenId];
+    //     auction
+    //         .auctionBidPeriod = _auctionBidPeriod;
+    //     auction
+    //         .bidIncreasePercentage = _bidIncreasePercentage;
+    //     auction
+    //     .whitelistedBuyers = _whitelistedBuyers;//<<<<<<added this line also
+    //     _createNewNftAuction(
+    //         _nftContractAddress,
+    //         _tokenId,
+    //         _erc20Token,
+    //         _minPrice,
+    //         _buyNowPrice,
+    //         _feeRecipients,
+    //         _feePercentages
+    //     );
+    // }
     function createNewNftAuction(
         address _nftContractAddress,
         uint256 _tokenId,
-        address _erc20Token,
-        uint128 _minPrice,
-        uint128 _buyNowPrice,
-        uint32 _auctionBidPeriod, //this is the time that the auction lasts until another bid occurs
-        uint32 _bidIncreasePercentage,
-        address[] memory _feeRecipients,
-        uint32[] memory _feePercentages
+        Auction memory auctionParams
     )
         external
         isAuctionNotStartedByOwner(_nftContractAddress, _tokenId)
-        priceGreaterThanZero(_minPrice)
-        increasePercentageAboveMinimum(_bidIncreasePercentage)
+        priceGreaterThanZero(auctionParams.minPrice)
+        increasePercentageAboveMinimum(auctionParams.bidIncreasePercentage)
     {
         nftContractAuctions[_nftContractAddress][_tokenId]
-            .auctionBidPeriod = _auctionBidPeriod;
+            .auctionBidPeriod = auctionParams.auctionBidPeriod;
         nftContractAuctions[_nftContractAddress][_tokenId]
-            .bidIncreasePercentage = _bidIncreasePercentage;
+            .bidIncreasePercentage = auctionParams.bidIncreasePercentage;
+        nftContractAuctions[_nftContractAddress][_tokenId]
+        .whitelistedBuyers = auctionParams.whitelistedBuyers;
         _createNewNftAuction(
             _nftContractAddress,
             _tokenId,
-            _erc20Token,
-            _minPrice,
-            _buyNowPrice,
-            _feeRecipients,
-            _feePercentages
+            auctionParams.ERC20Token,
+            auctionParams.minPrice,
+            auctionParams.buyNowPrice,
+            auctionParams.feeRecipients,
+            auctionParams.feePercentages
         );
     }
-
     /**********************************/
     /*╔══════════════════════════════╗
       ║             END              ║
@@ -778,8 +801,8 @@ contract NFTAuction {
 
     /********************************************************************
      * Allows for a standard sale mechanism where the NFT seller can    *
-     * can select an address to be whitelisted. This address is then    *
-     * allowed to make a bid on the NFT. No other address can bid on    *
+     * can select  addresses to be whitelisted. These addresses is then    *
+     * allowed to make a bid on the NFT. No other addresses can bid on    *
      * the NFT.                                                         *
      ********************************************************************/
     function _setupSale(
@@ -787,7 +810,7 @@ contract NFTAuction {
         uint256 _tokenId,
         address _erc20Token,
         uint128 _buyNowPrice,
-        address[] _whitelistedBuyers,
+        address[] memory _whitelistedBuyers,
         address[] memory _feeRecipients,
         uint32[] memory _feePercentages
     )
@@ -814,16 +837,17 @@ contract NFTAuction {
             .sender;
         if (!(_whitelistedBuyers.length == 0)) {
         for (uint256 i = 0; i < _whitelistedBuyers.length; i++) {
-            nftContractAuctions[_nftContractAddress][_tokenId].whitelistedBuyerexist[_whitelistedBuyers[i]] = true;
+            // nftContractAuctions[_nftContractAddress][_tokenId].whitelistedBuyerexist[_whitelistedBuyers[i]] = true;
+            isAddressWhitelisted[_tokenId][_whitelistedBuyers[i]]=true;
         }
-    }
+    }}
 
-    function createSale(
+    function createSale (
         address _nftContractAddress,
         uint256 _tokenId,
         address _erc20Token,
         uint128 _buyNowPrice,
-        address[] _whitelistedBuyers,
+        address[] memory _whitelistedBuyers,
         address[] memory _feeRecipients,
         uint32[] memory _feePercentages
     )
@@ -1307,8 +1331,9 @@ contract NFTAuction {
         require(_isASale(_nftContractAddress, _tokenId), "Not a sale");
         nftContractAuctions[_nftContractAddress][_tokenId]
             .whitelistedBuyers.push(_newWhitelistedBuyer);
-            nftContractAuctions[_nftContractAddress][_tokenId]
-            .whitelistedBuyerexist[_newWhitelistedBuyer]=true;
+            // nftContractAuctions[_nftContractAddress][_tokenId]
+            // .whitelistedBuyerexist[_newWhitelistedBuyer]=true;
+            isAddressWhitelisted[_tokenId][_newWhitelistedBuyer]=true;
         //if an underbid is by a non whitelisted buyer,reverse that bid
         address nftHighestBidder = nftContractAuctions[_nftContractAddress][
             _tokenId
@@ -1440,4 +1465,4 @@ contract NFTAuction {
       ╚══════════════════════════════╝*/
     /**********************************/
 }
-}
+
