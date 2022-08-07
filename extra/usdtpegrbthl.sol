@@ -184,13 +184,9 @@ contract RabbitHoleToken is ERC20, Ownable {
         token.transfer(msg.sender, amount);
     }
 
-    // buyback and burn the tokens
-    function buyback(uint256 amount) public {
-        // Transfer amount tokens from contract to msg.sender
-        token.transfer(msg.sender, amount);
+    
 
-        // Burn amount tokens from contract
-        token.transferFrom(address(this), address(0), amount);
-    }
+    // buyback and burn the tokens
+   
 
 }

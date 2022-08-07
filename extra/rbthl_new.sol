@@ -87,9 +87,10 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
 
     AggregatorV3Interface internal ethPriceFeed;
 
+    uint256 public supply = 45_000_000 ether; // private sale supply = 45000000
     uint256 public distributed;
 
-    uint256 public salePriceUsd = 10_000_000_000_000_000; //$0.01 ( 1e18 = 1 token , 1e16 = 0.01 token value)
+    uint256 public salePriceUsd = 10000000000000000; //$0.01
 
     mapping(address => uint256) public toRefund;
 
@@ -168,6 +169,18 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
             uint256 newMinted = distributed.add(tokensToBuy);
 
             uint256 exceedingEther;
+
+
+            if (newMinted >= supply) {
+                uint256 exceedingTokens = newMinted.sub(supply);
+                // Change the tokens to buy to the new number
+                tokensToBuy = tokensToBuy.sub(exceedingTokens);
+
+                // Recompute the available funds
+                // Convert the exceedingTokens to ether and refund that ether
+                uint256 etherUsed = funds.sub(tokensToBuy.mul(salePrice).div(1e18));
+                exceedingEther = funds.sub(etherUsed);
+            }
             
             return (tokensToBuy, exceedingEther);
         }
@@ -201,6 +214,7 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
 
             distributed = distributed.add(tokensToBuy);
 
+            supply = supply.sub(tokensToBuy);
             // Mint new tokens for each submission
 
             // eth deposit of user is stored in _ethDeposit
