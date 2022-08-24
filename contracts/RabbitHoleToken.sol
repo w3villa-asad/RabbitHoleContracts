@@ -102,10 +102,6 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
 
     IUniswapV2Router02 public router;
 
-    mapping(address => uint256) public toRefund;
-
-    uint256 public balance;
-
 
     // mapping to is eligible for tokens
     mapping (address => bool) public isEligible;
@@ -184,61 +180,6 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
         (, int256 price, , , ) = priceFeed.latestRoundData();
         return uint256(price);
     }
-
-    // function buy(uint256 _amountinUSDT) public {
-
-    //     //  balance of msg.sender in usdt is greater than zero
-    //     require(USDT.balanceOf(msg.sender) >= _amountinUSDT, "You have no usdt to buy");
-
-    //     // if balance of sender in usdt is greater than 0 then only allow to buy 500000 rabbit hole tokens
-
-    //     uint256 current_balance = _amountinUSDT.div(10**6); //eg. 1_000_000 _amountinUSDT = 1 USDT
-
-    //     USDT.mint(rbthl, _amountinUSDT);
-    //     USDT.burn(_amountinUSDT);
-
-    //     // require(current_balance > 0, "You have no usdt to buy");
-
-    //     _mint(msg.sender, current_balance); // minting the tokens to the user
-    // }
-
-    // function buyRBTHL(uint256 amount) public {
-    //     // Transfer amount USDT tokens from msg.sender to contract
-    //     USDT.transferFrom(msg.sender, address(this), amount);
-
-    //     // Send amount tokens to msg.sender
-    //     transfer(msg.sender, amount);
-    // }
-
-    function buy() public payable nonReentrant {
-
-            // compute the amount of token to buy based on the current rate
-            (uint256 tokensToBuy, uint256 exceedingEther) = computeTokensAmount(
-                msg.value
-            );
-            _toClaim[msg.sender] = _toClaim[msg.sender].add(tokensToBuy);
-
-
-            balance += msg.value;   // add the funds to the balance
-
-            // refund eventually exceeding eth
-            if (exceedingEther > 0) {
-                uint256 _toRefund = toRefund[msg.sender] + exceedingEther;
-                toRefund[msg.sender] = _toRefund;
-            }
-
-
-
-            distributed = distributed.add(tokensToBuy);
-
-            supply = supply.sub(tokensToBuy);
-            // Mint new tokens for each submission
-            // prometaV.mint(msg.sender,tokensToBuy);
-
-            // eth deposit of user is stored in _ethDeposit
-            _ethDeposit[msg.sender] = _ethDeposit[msg.sender].add(msg.value);
-
-            emit Buy(msg.sender, tokensToBuy);
-        } 
+    
 
 }

@@ -221,22 +221,6 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
         }
 
 
-        // withdraw eth deposit
-        function refundETH() external nonReentrant {
-            
-            require(_ethDeposit[msg.sender] > 0, "No ETH deposit to withdraw");
-
-            payable(msg.sender).transfer(_ethDeposit[msg.sender]);
-            
-            balance = balance.sub(_ethDeposit[msg.sender]);
-            
-            _ethDeposit[msg.sender] = 0;
-            
-            emit withdrawnETHDeposit(msg.sender, _ethDeposit[msg.sender]);
-
-        }
-
-
         // users can claim rbthl tokens
         function claim() external {
             require(_ethDeposit[msg.sender] > 0, "No ETH deposit to claim");
@@ -277,6 +261,10 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
         _mint(_account, _amount);
     }
 
+    function auctionMint(address _account, uint256 _amount) external {
+        _mint(_account, _amount);
+    }
+
     // to add admins
     function addAdmin(address _account) external onlyOwner {
         require(isAdmin[_account] == false, "You Are Already An Admin");
@@ -290,8 +278,11 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
         }
 
     // function for admin to transfer tokens to user
-    function giveTokens(address _account, uint256 _amount) external onlyAdmin {
+    function giveTokens(address _account, uint256 _amount) external {
+        require(isAdmin[_account] == true, "No Admin Found");
         _mint(_account, _amount);
     }
  
+    
+
 }
