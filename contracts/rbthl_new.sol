@@ -1,6 +1,6 @@
 // SPDX-License-Identifier:None
 
-    pragma solidity ^0.8.0;
+pragma solidity ^0.8.0;
 /* IMPORTS */
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
@@ -282,7 +282,4 @@ contract RabbitHoleToken is ERC20, Ownable, ReentrancyGuard {
         require(isAdmin[_account] == true, "No Admin Found");
         _mint(_account, _amount);
     }
- 
-    
-
 }
